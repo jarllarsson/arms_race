@@ -18,6 +18,11 @@ public class CheckpointChecker : MonoBehaviour
 	
 	}
 
+    public int getCurrentId()
+    {
+        return m_currentCheckpointId;
+    }
+
     void OnTriggerEnter(Collider p_object)
     {
         if (p_object.tag=="checkpoint")

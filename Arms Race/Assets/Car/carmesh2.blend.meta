@@ -1,44 +1,84 @@
 fileFormatVersion: 2
-guid: 3e7510c19436a664d8ba3c052049702b
-timeCreated: 1429394210
+guid: 334a9be743a1c1b408fc198b8c7c6163
+timeCreated: 1429397788
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: bwheel_l
-    100002: bwheel_r
-    100004: CarMesh
-    100006: //RootNode
-    100008: fwheel_l
-    100010: fwheel_r
-    100012: Cube
-    400000: bwheel_l
-    400002: bwheel_r
-    400004: CarMesh
-    400006: //RootNode
-    400008: fwheel_l
-    400010: fwheel_r
-    400012: Cube
+    100000: Armature
+    100002: bwheel_l
+    100004: bwheel_r
+    100006: CarMesh
+    100008: //RootNode
+    100010: fingers_l
+    100012: fingers_r
+    100014: fwheel_l
+    100016: fwheel_r
+    100018: hand_l
+    100020: hand_r
+    100022: lower_l
+    100024: lower_r
+    100026: lowermiddle_l
+    100028: lowermiddle_r
+    100030: Person
+    100032: Root
+    100034: swheel
+    100036: thumb_l
+    100038: thumb_r
+    100040: thumbbase_l
+    100042: thumbbase_r
+    100044: upper_l
+    100046: upper_r
+    100048: uppermiddle_l
+    100050: uppermiddle_r
+    400000: Armature
+    400002: bwheel_l
+    400004: bwheel_r
+    400006: CarMesh
+    400008: //RootNode
+    400010: fingers_l
+    400012: fingers_r
+    400014: fwheel_l
+    400016: fwheel_r
+    400018: hand_l
+    400020: hand_r
+    400022: lower_l
+    400024: lower_r
+    400026: lowermiddle_l
+    400028: lowermiddle_r
+    400030: Person
+    400032: Root
+    400034: swheel
+    400036: thumb_l
+    400038: thumb_r
+    400040: thumbbase_l
+    400042: thumbbase_r
+    400044: upper_l
+    400046: upper_r
+    400048: uppermiddle_l
+    400050: uppermiddle_r
     2300000: bwheel_l
     2300002: bwheel_r
     2300004: CarMesh
     2300006: fwheel_l
     2300008: fwheel_r
-    2300010: Cube
+    2300010: swheel
     3300000: bwheel_l
     3300002: bwheel_r
     3300004: CarMesh
     3300006: fwheel_l
     3300008: fwheel_r
-    3300010: Cube
-    4300000: bwheel_l
-    4300002: bwheel_r
-    4300004: fwheel_r
-    4300006: fwheel_l
-    4300008: CarMesh
-    4300010: Cube
+    3300010: swheel
+    4300000: Person
+    4300002: swheel
+    4300004: bwheel_l
+    4300006: bwheel_r
+    4300008: fwheel_r
+    4300010: fwheel_l
+    4300012: CarMesh
     7400000: Default Take
     9500000: //RootNode
+    13700000: Person
   materials:
     importMaterials: 1
     materialName: 0

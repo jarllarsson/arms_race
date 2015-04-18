@@ -39,11 +39,12 @@ public class CarController : MonoBehaviour
         //    if (m_thrust > m_maxThrust) m_thrust = m_maxThrust;
         //    m_thrustCooldown = 1.0f;
         //}
-        m_thrust = m_thrustPwr * p_toTheMetalAmount;
+        m_thrust = m_thrustPwr * Mathf.Clamp01(p_toTheMetalAmount);
     }
 
     public void SteeringWheel(float p_rotationDir)
     {
+        p_rotationDir=Mathf.Clamp(p_rotationDir,-1.0f,1.0f);
         m_swheelTurnPower = p_rotationDir * m_turnPwr * Mathf.Clamp01(m_speedTurnRatio*m_rigidBody.velocity.magnitude);
     }
 

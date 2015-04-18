@@ -8,7 +8,8 @@ public class AIPathFinder : MonoBehaviour
     public CheckpointChecker m_checkpointChecker;
     private int m_oldCheckpoint = -1;
     private int m_nextCheckpointIdx = 0;
-    public Transform m_nextCheckpointTransform;
+    private Transform m_nextCheckpointTransform;
+    private Checkpoint m_nextCheckpoint;
 
 	// Use this for initialization
 	void Start () 
@@ -26,6 +27,12 @@ public class AIPathFinder : MonoBehaviour
             }
         }
 	}
+
+    public Transform getNextCheckpoint()
+    {
+        return m_nextCheckpointTransform;
+    }
+
 	
 	// Update is called once per frame
 	void Update () 

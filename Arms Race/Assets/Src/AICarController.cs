@@ -13,6 +13,7 @@ public class AICarController : MonoBehaviour
 
     private Transform m_oldCheckPoint;
     private float m_standingStillThrustTime = 0.0f;
+    private Vector3 m_currentGoal;
 
 	// Use this for initialization
 	void Start () 
@@ -21,7 +22,7 @@ public class AICarController : MonoBehaviour
         if (m_IQ < 0) m_IQ = 0;
         if (m_IQ == m_maxIQ)
         {
-            m_carController.m_thrustPwr *= 1.2f;
+            m_carController.m_thrustPwr *= 1.4f;
             m_carController.m_turnPwr *= 1.4f;
         }
 	}
@@ -34,9 +35,13 @@ public class AICarController : MonoBehaviour
             Transform point = m_pathFinder.getNextCheckpoint();
             if (point)
             {
-                Vector2 spread = Random.insideUnitCircle;
-                Vector3 goalPos = point.position + new Vector3(spread.x * point.localScale.x * 0.25f, 0.0f, spread.y * point.localScale.z * 0.25f);
-                Vector3 diff = goalPos - transform.position;
+                if (point != m_oldCheckPoint || m_oldCheckPoint==null) 
+                {
+                    Vector2 spread = Random.insideUnitCircle;
+                    m_currentGoal = point.position + new Vector3(spread.x * point.localScale.x * 0.25f, 0.0f, spread.y * point.localScale.z * 0.25f);
+                    m_oldCheckPoint = point;
+                }
+                Vector3 diff = m_currentGoal - transform.position;
                 float IQfac = ((float)m_IQ / (float)m_maxIQ);
                 float sideDir = Vector3.Dot(diff, transform.right); // if in front of right, steer to the right(1.0), else to the left(-1.0)
 

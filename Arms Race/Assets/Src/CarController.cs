@@ -45,6 +45,7 @@ public class CarController : MonoBehaviour
                 wheel.localRotation *= Quaternion.Euler(new Vector3(rotVal*Time.deltaTime, 0.0f, 0.0f));
             }
         }
+
 	}
 
     public void ThrustPedal(float p_toTheMetalAmount)

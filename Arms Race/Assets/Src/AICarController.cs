@@ -5,6 +5,7 @@ public class AICarController : MonoBehaviour
 {
     public CarController m_carController;
     public AIPathFinder m_pathFinder;
+    public CarAttack m_atk;
     public int m_IQ=5; // 0-5
     float m_thinkCounter = 0.0f;
     private int m_maxIQ = 5;
@@ -14,6 +15,8 @@ public class AICarController : MonoBehaviour
     private Transform m_oldCheckPoint;
     private float m_standingStillThrustTime = 0.0f;
     private Vector3 m_currentGoal;
+
+    public HitSense m_leftSense, m_rightSense;
 
 	// Use this for initialization
 	void Start () 
@@ -86,6 +89,11 @@ public class AICarController : MonoBehaviour
                     }
                 }
             }
+            // Atk
+            if (m_leftSense.isSensing())
+                m_atk.FireLeft();
+            if (m_rightSense.isSensing())
+                m_atk.FireRight();
         }
         else
             m_decisionTimeTick = m_decisionTime;

@@ -11,6 +11,7 @@ public class CarController : MonoBehaviour
     private float m_swheelTurnPower;
     private float m_thrust;
     public Rigidbody m_rigidBody;
+    public CarHitByOtherScript m_hitInfo;
 
     private float m_thrustCooldown;
     public Transform[] m_spinningWheels;
@@ -34,15 +35,18 @@ public class CarController : MonoBehaviour
        //m_thrustCooldown -= 5.0f*Time.deltaTime;
        //if (m_thrustCooldown < 0.0f)
        //    m_thrust = 0.0f;
-        float vel = m_rigidBody.velocity.magnitude*Time.deltaTime;
-
-        if (m_spinningWheels != null)
+        if (!m_hitInfo.isHit())
         {
-            for (int i=0;i<m_spinningWheels.Length;i++)
+            float vel = m_rigidBody.velocity.magnitude * Time.deltaTime;
+
+            if (m_spinningWheels != null)
             {
-                Transform wheel = m_spinningWheels[i];
-                float rotVal=-((vel/m_spinningWheelsRadii[i])*360.0f);
-                wheel.localRotation *= Quaternion.Euler(new Vector3(rotVal*Time.deltaTime, 0.0f, 0.0f));
+                for (int i = 0; i < m_spinningWheels.Length; i++)
+                {
+                    Transform wheel = m_spinningWheels[i];
+                    float rotVal = -((vel / m_spinningWheelsRadii[i]) * 360.0f);
+                    wheel.localRotation *= Quaternion.Euler(new Vector3(rotVal * Time.deltaTime, 0.0f, 0.0f));
+                }
             }
         }
 
@@ -77,8 +81,7 @@ public class CarController : MonoBehaviour
     }
 
     private void LateUpdate()
-    {
-        
+    {    
         if (m_personSteerRotators != null)
         {
             foreach (Transform wheel in m_personSteerRotators)
@@ -91,8 +94,11 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        m_rigidBody.AddRelativeForce(0f, 0f, m_thrust);
-        m_rigidBody.AddRelativeTorque(0f, m_swheelTurnPower, 0f);
+        if (!m_hitInfo.isHit())
+        {
+            m_rigidBody.AddRelativeForce(0f, 0f, m_thrust);
+            m_rigidBody.AddRelativeTorque(0f, m_swheelTurnPower, 0f);
+        }
     }
 
 }

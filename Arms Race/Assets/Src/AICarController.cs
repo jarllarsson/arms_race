@@ -25,8 +25,13 @@ public class AICarController : MonoBehaviour
         if (m_IQ < 0) m_IQ = 0;
         if (m_IQ == m_maxIQ)
         {
-            m_carController.m_thrustPwr *= 1.4f;
+            m_carController.m_thrustPwr *= 1.6f;
             m_carController.m_turnPwr *= 1.4f;
+        }
+        else
+        {
+            m_carController.m_thrustPwr *= 1.2f;
+            m_carController.m_turnPwr *= 1.2f;
         }
 	}
 	

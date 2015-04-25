@@ -8,7 +8,7 @@ public class CamRigsSetup : MonoBehaviour
 	public PlayerHandler m_playerHandler;
     
 	// Use this for initialization
-	void Awake() 
+	void Start() 
     {
 		m_cameraMode = m_playerHandler.getCars().Length;
 		SetupComposition(m_cameraMode-1);

@@ -4,12 +4,13 @@ using System.Collections;
 public class PlayerHandler : MonoBehaviour 
 {
     public GameObject[] m_players;
+    public GameObject[] m_correspondingCPU_toRemove;
     public bool[] m_playersActive;
 	private GameObject[] m_curatedPlayerList;
 
 	public enum PlayerOneMode
 	{
-		KEYBOARD, GAMEPAD
+		KEYBOARD=0, GAMEPAD=1
 	}
 	public PlayerOneMode m_playerOneInputMode=PlayerOneMode.KEYBOARD;
 	private int m_inputIdOffset=0;
@@ -17,17 +18,23 @@ public class PlayerHandler : MonoBehaviour
 	// Use this for initialization
 	void Awake() 
     {
+        loadFromSettings();
 		m_playersActive[0]=true; // always
 
 		if (m_playerOneInputMode==PlayerOneMode.GAMEPAD)
 		{
 			m_inputIdOffset=1;
 		}
-		for(int i=0;i<m_players.Length;i++)
+		for(int i=1;i<m_players.Length;i++) // never check slot 1
         {
             if (i<m_playersActive.Length && !m_playersActive[i])
             {
-                DestroyImmediate(m_players[i]);
+                DestroyImmediate(m_players[i]); // remove player if not active
+            }
+            else
+            {
+                // if player is active, remove CPU with same color
+                DestroyImmediate(m_correspondingCPU_toRemove[i]);
             }
         }
 		// Finally assign correct joystick id to players (0 is keyboard)
@@ -38,6 +45,27 @@ public class PlayerHandler : MonoBehaviour
 			inputController.m_playerControllerId = i+m_inputIdOffset;
 		}
 	}
+
+    private void loadFromSettings()
+    {
+        GameObject settingsObj = GameObject.FindGameObjectWithTag("playerInitSettings");    
+        if (settingsObj)
+        {
+            SettingsKeeper settingsScript = settingsObj.GetComponent<SettingsKeeper>();
+            if (settingsScript)
+            {
+                m_playerOneInputMode = settingsScript.m_playerOneInputMode;
+                if (settingsScript.m_playersActive.Length<=m_playersActive.Length)
+                {
+                    for (int i=0;i<m_playersActive.Length;i++)
+                    {
+                        m_playersActive[i]=settingsScript.m_playersActive[i];
+                    }
+                }
+            }
+            Destroy(settingsObj);
+        }       
+    }
 
 	int maxPlayerAmount()
 	{

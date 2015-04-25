@@ -6,9 +6,23 @@ public class PlayerHandler : MonoBehaviour
     public GameObject[] m_players;
     public bool[] m_playersActive;
 	private GameObject[] m_curatedPlayerList;
+
+	public enum PlayerOneMode
+	{
+		KEYBOARD, GAMEPAD
+	}
+	public PlayerOneMode m_playerOneInputMode=PlayerOneMode.KEYBOARD;
+	private int m_inputIdOffset=0;
+
 	// Use this for initialization
 	void Awake() 
     {
+		m_playersActive[0]=true; // always
+
+		if (m_playerOneInputMode==PlayerOneMode.GAMEPAD)
+		{
+			m_inputIdOffset=1;
+		}
 		for(int i=0;i<m_players.Length;i++)
         {
             if (i<m_playersActive.Length && !m_playersActive[i])
@@ -16,7 +30,13 @@ public class PlayerHandler : MonoBehaviour
                 DestroyImmediate(m_players[i]);
             }
         }
-		getCars();
+		// Finally assign correct joystick id to players (0 is keyboard)
+		GameObject[] cars = getCars();
+		for(int i=0;i<cars.Length;i++)
+		{
+			InputCarController inputController = cars[i].GetComponent<InputCarController>();
+			inputController.m_playerControllerId = i+m_inputIdOffset;
+		}
 	}
 
 	int maxPlayerAmount()
